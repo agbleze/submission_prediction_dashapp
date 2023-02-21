@@ -3,8 +3,9 @@ from dash import html, dcc
 from style import input_style
 
 
+variables = ['progress_percent', 'extra_time_min', 'work_rate', 'average_answer_time_in_min', 'state_category']
 
-dbc.Row([
+data_viz_layout = dbc.Row([
     dbc.Col(id="",
             children=[dbc.Row(dbc.Label('Select variable for boxplot', style=input_style)),
                       dbc.Row(dcc.Dropdown(id='boxplot_variable_select',
