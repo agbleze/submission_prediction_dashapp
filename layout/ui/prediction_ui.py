@@ -47,12 +47,6 @@ prediction_layout = html.Div(children=[dbc.Row([
                                                                     create_dropdown(dropdown_values = ['slow', 'normal', 'fast'],
                                                                                     dropdown_id = 'id_input_work_rate'
                                                                                     )
-                                                                    # dcc.Dropdown(id='id_input_work_rate',
-                                                                    #              placeholder='work rate',
-                                                                    #               options=[{'label': var, 'value': var}
-                                                                    #                         for var in 
-                                                                    #                     ]
-                                                                    #              )
                                                                 ]
                                                         ),
                                                 dbc.Col(children=[
