@@ -1,65 +1,25 @@
 import dash_bootstrap_components as dbc
 from dash import html, dcc
 from style import input_style
+from helper_components import create_dropdown, create_dropdown_with_graph_figure
+from typing import List, str, Dict
 
 
-variables = ['progress_percent', 'extra_time_min', 'work_rate', 'average_answer_time_in_min', 'state_category']
+boxplot_features = ['extra_time_min', 'average_answer_time_in_min', 'progress_percent']
 
-data_viz_layout = dbc.Row([
-    dbc.Col(id="",
-            children=[dbc.Row(dbc.Label('Select variable for boxplot', style=input_style)),
-                      dbc.Row(dcc.Dropdown(id='boxplot_variable_select',
-                                            options=[{'label': var, 'value': var}
-                                                    for var in variables
-                                                    ]
-                                            )
-                              ),
-                      dbc.Row(dcc.Loading(type='circle',
-                                            children=[dbc.Col(#lg=9,
-                                                            children=[dcc.Graph(id='boxplot_graph')]
+barplot_features = ['work_rate', 'extra_time_min', 'average_answer_time_in_min', 'progress_percent'] 
+
+data_viz_layout = dbc.Row([create_dropdown_with_graph_figure(label='Select variable for boxplot', 
+                                                             dropdown_values=boxplot_features,
+                                                             dropdown_id='id_boxplot_variable_select',
+                                                             graph_id='boxplot_graph'),
+                           create_dropdown_with_graph_figure(label='Select Variable to visualize how it related with target - submission status',
+                                                             dropdown_values=barplot_features,
+                                                             dropdown_id='id_bargraph_variable_select', 
+                                                             graph_id='bar_graph'
                                                         )
-                                                    ]
-                                        )
-                              )
-                      ]
-        
-        ),
-    dbc.Col(id='',
-            children=[dbc.Row(dbc.Label('Select Variable to plot scatterplot with submission status', style=input_style)),
-                      dbc.Row(dcc.Dropdown(id='variable_select',
-                                            options=[{'label': var, 'value': var}
-                                                    for var in variables
-                                                    ]
-                                        )
-                              ),
-                      dbc.Row(dcc.Loading(type='circle',
-                                            children=[dbc.Col(#lg=9,
-                                                            children=[
-                                                                dcc.Graph(id='scatter_graph')
-                                                            ]
-                                                
-                                                        )
-                                                    ]
-                                            )
-                              )
-                      ]
-            ),
-    dbc.Col(id='',
-            children=[dbc.Row(dbc.Label('Select variable for boxplot', style=input_style)),
-                      #dbc.Row(),
-                      dbc.Row(dcc.Loading(type='circle',
-                                            children=[dbc.Col(id='corr_graph',
-                                                        children=[dcc.Graph(id='multicorr_graph',
-                                                                            #figure=corr_fig
-                                                                            )
-                                                                ]
-                                                    )
-                                                    ]
-                                        )
-                              )
-                      ]
-            )
-])
+                        ]
+                        )
 
 
 
