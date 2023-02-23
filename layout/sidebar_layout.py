@@ -18,7 +18,7 @@ appside_layout = html.Div(
                 dtc.SideBarItem(id="id_model_eval", label="Model Evaluation", 
                                 icon="fas fa-chart-line"
                                 ),
-                dbc.Collapse(id="id_model_eval_btns", is_open=False,
+                dbc.Collapse(id="id_collapse_model_eval", is_open=False,
                              children=[
                                 dbc.Button(
                                             "Cross validation",
