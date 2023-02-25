@@ -183,6 +183,13 @@ def toggle_sidebar_buttons(input_value, state_value):
     return state_value
 
 
+# function to show evaluation page when an evaluation metric in collapse section is clicked
+@app.callback(Output(component_id='', component_property=''),
+              Input(component_id='', component_property='')
+              )
+def show_model_evaluation_page()
+
+
 
 
 
