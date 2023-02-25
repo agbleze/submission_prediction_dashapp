@@ -1,6 +1,6 @@
 
 #%%
-from dash import html, Input, Output, State, dcc
+from dash import html, Input, Output, State, dcc, callback_context
 import dash_bootstrap_components as dbc
 import pandas as pd
 from dash.exceptions import PreventUpdate
@@ -24,6 +24,7 @@ from urllib.parse import unquote
 import joblib
 import functools
 import plotly.express as px
+
 
 
 from layout.sidebar_layout import appside_layout
@@ -185,9 +186,48 @@ def toggle_sidebar_buttons(input_value, state_value):
 
 # function to show evaluation page when an evaluation metric in collapse section is clicked
 @app.callback(Output(component_id='', component_property=''),
-              Input(component_id='', component_property='')
+              Input(component_id='id_crossval_btn', component_property='n_clicks_timestamp'),
+              Input(component_id='id_classification_btn', component_property='n_clicks_timestamp'),
+              Input(component_id='id_roc_btn', component_property='n_clicks_timestamp')
               )
-def show_model_evaluation_page()
+def show_model_evaluation_page():
+    button_id = callback_context.triggered[0]["prop_id"].split(".")[0]
+    if not callback_context.triggered:
+        button_id = 'No clicks yet'
+    
+
+
+
+
+
+
+@callback(
+    Output("page_content", "children"),
+    [
+        Input("id_1", "n_clicks_timestamp"),
+        Input("id_2", "n_clicks_timestamp"),
+        Input("id_3", "n_clicks_timestamp"),
+        Input("id_4", "n_clicks_timestamp"),
+        Input("id_5", "n_clicks_timestamp"),
+    ],
+)
+def sidebar_display(id1: str, id2: str, id3: str, id4: str, id5: str):
+    ctx = dash.callback_context
+    button_id = ctx.triggered[0]["prop_id"].split(".")[0]
+
+    if not ctx.triggered:
+        button_id = "No clicks yet"
+    elif button_id == "id_1":
+        return asset_portfolio.portfolio
+    elif button_id == "id_2":
+        return asset_portfolio.client_dashboard
+    elif button_id == "id_3":
+        return asset_portfolio.content_3
+    elif button_id == "id_4":
+        return asset_portfolio.content_4
+    else:
+        return asset_portfolio.content_5
+
 
 
 
