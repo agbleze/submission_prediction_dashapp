@@ -20,32 +20,32 @@ appside_layout = html.Div(
                                 ),
                 dbc.Collapse(id="id_collapse_model_eval", is_open=False,
                              children=[
-                                dbc.Button(
-                                            "Cross validation",
-                                            id="id_crossval_btn",
-                                            value="crossval_btn_clicked",
-                                            #style=button_style,
-                                            n_clicks=0,
-                                        ),
-                                html.Hr(),
-                                dbc.Button(
-                                            "Classification report",
-                                            id="id_classification_btn",
-                                            value="classification_btn_clicked",
-                                            #style=button_style,
-                                            n_clicks=0,
-                                        ),
-                                html.Hr(),
-                                dbc.Button(
-                                            "ROC Curve",
-                                            id="roc_btn",
-                                            value="roc_btn_clicked",
-                                            #style=button_style,
-                                            n_clicks=0,
-                                        )#,
-                                #html.Hr(),
-                                
-                            ],
+                                        dbc.Button(
+                                                    "Cross validation",
+                                                    id="id_crossval_btn",
+                                                    value="crossval_btn_clicked",
+                                                    #style=button_style,
+                                                    n_clicks=0,
+                                                ),
+                                        html.Hr(),
+                                        dbc.Button(
+                                                    "Classification report",
+                                                    id="id_classification_btn",
+                                                    value="classification_btn_clicked",
+                                                    #style=button_style,
+                                                    n_clicks=0,
+                                                ),
+                                        html.Hr(),
+                                        dbc.Button(
+                                                    "ROC Curve",
+                                                    id="id_roc_btn",
+                                                    value="roc_btn_clicked",
+                                                    #style=button_style,
+                                                    n_clicks=0,
+                                                )#,
+                                        #html.Hr(),
+                                        
+                                    ]
                              ),
                 
                 
