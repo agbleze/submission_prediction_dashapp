@@ -4,7 +4,7 @@ from numpy import place
 from style import homepage_icon_style, page_style, input_style, button_style
 import dash_trich_components as dtc
 from helper_components import (create_offcanvans, output_card, create_dropdown,
-                               plot_histogram, plot_scatterplot, make_boxplot,
+                               plot_histogram, make_boxplot,
                                CorrelationMatrix
                                )
 import pandas as pd
