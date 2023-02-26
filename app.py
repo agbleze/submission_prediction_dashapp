@@ -32,6 +32,10 @@ from layout.sidebar_layout import appside_layout
 from layout.ui.data_viz_ui import data_viz_layout
 from layout.ui.project_description_ui import project_descrip_layout
 from layout.ui.prediction_ui import prediction_layout
+from layout.ui.classification_report_ui import classification_report_layout
+from layout.ui.crossval_ui import crossval_layout
+from layout.ui.roc_curve_ui import roc_curve_layout
+
 
 #loaded_model = joblib.load(filename='bagging.model')
 #data = pd.read_csv(r"Data/train_set.csv")
@@ -185,48 +189,27 @@ def toggle_sidebar_buttons(input_value, state_value):
 
 
 # function to show evaluation page when an evaluation metric in collapse section is clicked
-@app.callback(Output(component_id='', component_property=''),
+@app.callback(Output(component_id='page_content', component_property='children'),
               Input(component_id='id_crossval_btn', component_property='n_clicks_timestamp'),
               Input(component_id='id_classification_btn', component_property='n_clicks_timestamp'),
               Input(component_id='id_roc_btn', component_property='n_clicks_timestamp')
               )
-def show_model_evaluation_page():
+def show_model_evaluation_page(id_crossval, id_classification, id_roc):
     button_id = callback_context.triggered[0]["prop_id"].split(".")[0]
     if not callback_context.triggered:
         button_id = 'No clicks yet'
+    elif button_id == 'id_crossval_btn':
+        return crossval_layout
+    elif button_id == 'id_classification_btn':
+        return classification_report_layout
+    elif button_id == 'id_roc_btn':
+        return roc_curve_layout
+    else:
+        return project_descrip_layout
+
+
     
 
-
-
-
-
-
-@callback(
-    Output("page_content", "children"),
-    [
-        Input("id_1", "n_clicks_timestamp"),
-        Input("id_2", "n_clicks_timestamp"),
-        Input("id_3", "n_clicks_timestamp"),
-        Input("id_4", "n_clicks_timestamp"),
-        Input("id_5", "n_clicks_timestamp"),
-    ],
-)
-def sidebar_display(id1: str, id2: str, id3: str, id4: str, id5: str):
-    ctx = dash.callback_context
-    button_id = ctx.triggered[0]["prop_id"].split(".")[0]
-
-    if not ctx.triggered:
-        button_id = "No clicks yet"
-    elif button_id == "id_1":
-        return asset_portfolio.portfolio
-    elif button_id == "id_2":
-        return asset_portfolio.client_dashboard
-    elif button_id == "id_3":
-        return asset_portfolio.content_3
-    elif button_id == "id_4":
-        return asset_portfolio.content_4
-    else:
-        return asset_portfolio.content_5
 
 
 
