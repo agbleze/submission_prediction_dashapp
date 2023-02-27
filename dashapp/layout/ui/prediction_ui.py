@@ -1,7 +1,7 @@
 import dash_bootstrap_components as dbc
 from dash import html, dcc
-from style import input_style, button_style
-from helper_components import (output_card, create_dropdown
+from dashapp.style import input_style, button_style
+from dashapp.helper_components import (output_card, create_dropdown
                                )
 import pandas as pd
 

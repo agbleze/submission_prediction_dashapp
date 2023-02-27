@@ -1,8 +1,8 @@
 from dash import html, dcc
 import dash_bootstrap_components as dbc
 
-from arguments import args
-from helper_components import create_img_container
+from dashapp.arguments import args
+from dashapp.helper_components import create_img_container
 
 
 crossval_layout = html.Div(

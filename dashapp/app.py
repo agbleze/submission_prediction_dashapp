@@ -4,7 +4,7 @@ from dash import html, Input, Output, State, dcc, callback_context
 import dash_bootstrap_components as dbc
 import pandas as pd
 from dash.exceptions import PreventUpdate
-from helper_components import (make_boxplot, plot_barplot, get_path,
+from dashapp.helper_components import (make_boxplot, plot_barplot, get_path,
                                )
 import dash
 import joblib
@@ -12,18 +12,18 @@ import functools
 import plotly.express as px
 
 
-from layout.sidebar_layout import appside_layout
-from layout.ui.data_viz_ui import data_viz_layout
-from layout.ui.project_description_ui import project_descrip_layout
-from layout.ui.prediction_ui import prediction_layout
-from layout.ui.classification_report_ui import classification_report_layout
-from layout.ui.crossval_ui import crossval_layout
-from layout.ui.roc_curve_ui import roc_curve_layout
+from .layout.sidebar_layout import appside_layout
+from .layout.ui.data_viz_ui import data_viz_layout
+from .layout.ui.project_description_ui import project_descrip_layout
+from .layout.ui.prediction_ui import prediction_layout
+from .layout.ui.classification_report_ui import classification_report_layout
+from .layout.ui.crossval_ui import crossval_layout
+from .layout.ui.roc_curve_ui import roc_curve_layout
 
 
-data_path = get_path(folder_name='data', file_name='selected_data_features.csv')
+data_path = get_path(folder_name='dashapp/data', file_name='selected_data_features.csv')
 
-model_path = get_path(folder_name='model_store', file_name='best_model.model')
+model_path = get_path(folder_name='dashapp/model_store', file_name='best_model.model')
 data = pd.read_csv(data_path)
 
 best_model_loaded = joblib.load(model_path)

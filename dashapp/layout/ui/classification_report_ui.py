@@ -1,8 +1,8 @@
 from dash import html, dcc
 import dash_bootstrap_components as dbc
 from PIL import Image
-from helper_components import create_img_container
-from arguments import args
+from dashapp.helper_components import create_img_container
+from dashapp.arguments import args
 
 
 ## grouped bar graph of various model report

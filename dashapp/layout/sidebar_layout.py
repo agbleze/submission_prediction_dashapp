@@ -1,7 +1,7 @@
 import dash_bootstrap_components as dbc
 from dash import html
 import dash_trich_components as dtc
-from style import page_style
+from dashapp.style import page_style
 import pandas as pd
 
 appside_layout = html.Div(

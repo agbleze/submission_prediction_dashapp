@@ -1,6 +1,6 @@
 import dash_bootstrap_components as dbc
 from dash import html, dcc
-from helper_components import create_dropdown_with_graph_figure
+from dashapp.helper_components import create_dropdown_with_graph_figure
 from typing import List, Dict
 
 

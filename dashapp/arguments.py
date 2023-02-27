@@ -1,26 +1,26 @@
 from argparse import Namespace
-from helper_components import get_path
+from .helper_components import get_path
 from PIL import Image
 
-roc_decision_tree_path = get_path(folder_name='img', file_name='decision_tree_ROC.png')
-roc_extradecision_path = get_path(folder_name='img', file_name='extra_decision_ROC.png')
-roc_randomforest_path = get_path(folder_name='img', file_name='randomForest_ROC.png')
-roc_logistic_path = get_path(folder_name='img', file_name='logistic_ROC.png')
-roc_svclinear_path = get_path(folder_name='img', file_name='svcLinear_ROC.png')
-roc_svcpoly_path = get_path(folder_name='img', file_name='svcPoly_ROC.png')
-roc_svcrbf_path = get_path(folder_name='img', file_name='svcRbf_ROC.png')
+roc_decision_tree_path = get_path(folder_name='dashapp/img', file_name='decision_tree_ROC.png')
+roc_extradecision_path = get_path(folder_name='dashapp/img', file_name='extra_decision_ROC.png')
+roc_randomforest_path = get_path(folder_name='dashapp/img', file_name='randomForest_ROC.png')
+roc_logistic_path = get_path(folder_name='dashapp/img', file_name='logistic_ROC.png')
+roc_svclinear_path = get_path(folder_name='dashapp/img', file_name='svcLinear_ROC.png')
+roc_svcpoly_path = get_path(folder_name='dashapp/img', file_name='svcPoly_ROC.png')
+roc_svcrbf_path = get_path(folder_name='dashapp/img', file_name='svcRbf_ROC.png')
 
-acc_score_path = get_path(folder_name='img', file_name='classifiers_accuracy_score.png')
-fittime_path = get_path(folder_name='img', file_name='classifiers_fittime.png')
-scoretime_path = get_path(folder_name='img', file_name='classifiers_scoretime.png')
+acc_score_path = get_path(folder_name='dashapp/img', file_name='classifiers_accuracy_score.png')
+fittime_path = get_path(folder_name='dashapp/img', file_name='classifiers_fittime.png')
+scoretime_path = get_path(folder_name='dashapp/img', file_name='classifiers_scoretime.png')
 
-report_decision_tree_path = get_path(folder_name='img/reports', file_name='decision_tree_report.png')
-report_extradecision_path = get_path(folder_name='img/reports', file_name='extra_decision_tree_report.png')
-report_logistic_path = get_path(folder_name='img/reports', file_name='logistic_report.png')
-report_randomforest_path = get_path(folder_name='img/reports', file_name='random_forest_report.png')
-report_svclinear_path = get_path(folder_name='img/reports', file_name='svc_linear_report.png')
-report_svcpoly_path = get_path(folder_name='img/reports', file_name='svc_poly_report.png')
-report_svcrbf_path = get_path(folder_name='img/reports', file_name='svc_rbf_report.png')
+report_decision_tree_path = get_path(folder_name='dashapp/img/reports', file_name='decision_tree_report.png')
+report_extradecision_path = get_path(folder_name='dashapp/img/reports', file_name='extra_decision_tree_report.png')
+report_logistic_path = get_path(folder_name='dashapp/img/reports', file_name='logistic_report.png')
+report_randomforest_path = get_path(folder_name='dashapp/img/reports', file_name='random_forest_report.png')
+report_svclinear_path = get_path(folder_name='dashapp/img/reports', file_name='svc_linear_report.png')
+report_svcpoly_path = get_path(folder_name='dashapp/img/reports', file_name='svc_poly_report.png')
+report_svcrbf_path = get_path(folder_name='dashapp/img/reports', file_name='svc_rbf_report.png')
 
 
 img_decision_tree_roc = Image.open(roc_decision_tree_path)

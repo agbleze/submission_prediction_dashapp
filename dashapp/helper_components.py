@@ -1,6 +1,6 @@
 from dash import dcc, html
 import dash_bootstrap_components as dbc
-from style import cardbody_style, card_icon, cardimg_style, card_style
+from dashapp.style import card_icon
 import plotly.express as px
 import pandas as pd
 from typing import List, Optional, Dict

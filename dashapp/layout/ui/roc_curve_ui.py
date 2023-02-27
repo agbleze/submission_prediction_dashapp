@@ -1,9 +1,9 @@
 from dash import html, dcc
 import dash_bootstrap_components as dbc
-from arguments import args
+from dashapp.arguments import args
 
 
-from helper_components import create_img_container
+from dashapp.helper_components import create_img_container
 
 
 roc_curve_layout = html.Div(children=[dbc.Row(children=[
