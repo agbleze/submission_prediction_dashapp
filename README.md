@@ -1,6 +1,6 @@
-# Dash app package powered by machine learning as POC for an online education provider
+## Dash app package powered by machine learning as POC for an online education provider
 
-# Project description
+## Project description
 
 The aim of this project is to predict the status of assignments submitted by students which could be either pass or not pass. The client is an online education provider who sought to obtain an intelligent tool that can enable the prediction of whether a student will pass an assignment submitted or not and by this pre-emptively develop guidelines and procedures that enable students graduate on time while also plan resources to student class occupany requirements.
 
@@ -31,6 +31,7 @@ This repository is essentially a package that can be run to obtain a web applica
 ```pip install . ```
 
 4. Run the application
+
 ```python -m dashapp```
 
 
