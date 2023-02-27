@@ -4,7 +4,7 @@
 
 The aim of this project is to predict the status of assignments submitted by students which could be either pass or not pass. The client is an online education provider who sought to obtain an intelligent tool that can enable the prediction of whether a student will pass an assignment submitted or not and by this pre-emptively develop guidelines and procedures that enable students graduate on time while also plan resources to student class occupany requirements.
 
-The data exploration and development of machine learning models to satisfy the use case is captured in detail in a different repo. If you are interested in the details of the modelling procedure then please refer to the repository (here)[https://github.com/agbleze/modeling_submission_pass]
+The data exploration and development of machine learning models to satisfy the use case is captured in detail in a different repo. If you are interested in the details of the modelling procedure then please refer to the repository [here](https://github.com/agbleze/modeling_submission_pass)
 
 
 This repository is essentially a package that can be run to obtain a web application with a user interface for visualizing the various features and using the model developed to make prediction in production when deployed.
