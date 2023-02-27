@@ -12,7 +12,9 @@ This repository is essentially a package that can be run to obtain a web applica
 
 ## How to run the code (python package)
 
-1. First create a virtual environment and activate the environment to create an isolated environment for running the code. This can be done using python from the terminal as follows (The commands are for MacOs. Please run the equivalent of your operating system in case that differs);
+1. First create a virtual environment and activate the environment to create an isolated environment for running the code. 
+ 
+This can be done using python from the terminal as follows (The commands are for MacOs. Please run the equivalent of your operating system in case that differs);
 
 - I. Create a virtual environment called env or specify path to directory where you want it to be created (choose a name of your choice)
 
