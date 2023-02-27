@@ -1,11 +1,7 @@
 import dash_bootstrap_components as dbc
 from dash import html, dcc
-from numpy import place
-from style import homepage_icon_style, page_style, input_style, button_style
-import dash_trich_components as dtc
-from helper_components import (output_card, create_dropdown,
-                               plot_histogram, make_boxplot,
-                               CorrelationMatrix
+from style import input_style, button_style
+from helper_components import (output_card, create_dropdown
                                )
 import pandas as pd
 
@@ -57,13 +53,6 @@ prediction_layout = html.Div(children=[dbc.Row([
                                                                         )
                                                                 ]
                                                         ),
-                                                # dbc.Col(children=[output_card(id="prediction_output",
-                                                #                                 card_label="Prediction",
-                                                #                                 card_size=2,
-                                                #                                 icon = 'fa-solid fa-check'
-                                                #                             )
-                                                #                 ]
-                                                #         ),
                                                 ]
                                             ),
                                         
