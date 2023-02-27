@@ -4,7 +4,7 @@
 
 The aim of this project is to predict the status of assignments submitted by students which could be either pass or not pass. The client is an online education provider who sought to obtain an intelligent tool that can enable the prediction of whether a student will pass an assignment submitted or not and by this pre-emptively develop guidelines and procedures that enable students graduate on time while also plan resources to student class occupany requirements.
 
-The data exploration and development of machine learning models to satisfy the use case is captured in detail in a different repo. If you are interested in the details of the modelling procedure then please refer to the repository here
+The data exploration and development of machine learning models to satisfy the use case is captured in detail in a different repo. If you are interested in the details of the modelling procedure then please refer to the repository (here)[https://github.com/agbleze/modeling_submission_pass]
 
 
 This repository is essentially a package that can be run to obtain a web application with a user interface for visualizing the various features and using the model developed to make prediction in production when deployed.
@@ -14,10 +14,11 @@ This repository is essentially a package that can be run to obtain a web applica
 
 1. First create a virtual environment and activate the environment to create an isolated environment for running the code. This can be done using python from the terminal as follows (The commands are for MacOs. Please run the equivalent of your operating system in case that differs);
 
--- I Create a virtual environment called env or specify path to directory where you want it to be created (choose a name of your choice)
+- I. Create a virtual environment called env or specify path to directory where you want it to be created (choose a name of your choice)
+
 ``` python3 -m venv env```
 
---II Activate virtual environment (Navigate to where you created the virtual env and activate as location/virtual_env/bin/activate as demonstrated as follows
+- II. Activate virtual environment (Navigate to where you created the virtual env and activate as location/virtual_env/bin/activate as demonstrated as follows
 
 ``` source env/bin/activate ```
 
