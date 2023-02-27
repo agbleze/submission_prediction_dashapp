@@ -2,7 +2,7 @@ import dash_bootstrap_components as dbc
 from dash import html, dcc
 from style import input_style
 from helper_components import create_dropdown, create_dropdown_with_graph_figure
-from typing import List, str, Dict
+from typing import List, Dict
 
 
 boxplot_features = ['extra_time_min', 'average_answer_time_in_min', 'progress_percent']
