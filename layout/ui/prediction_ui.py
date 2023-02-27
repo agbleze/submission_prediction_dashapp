@@ -3,16 +3,12 @@ from dash import html, dcc
 from numpy import place
 from style import homepage_icon_style, page_style, input_style, button_style
 import dash_trich_components as dtc
-from helper_components import (create_offcanvans, output_card, create_dropdown,
+from helper_components import (output_card, create_dropdown,
                                plot_histogram, make_boxplot,
                                CorrelationMatrix
                                )
 import pandas as pd
 
-
-
-
-#progress_percent	extra_time_min	work_rate
 
 prediction_layout = html.Div(children=[dbc.Row([
                                                 dbc.Col([
@@ -61,27 +57,34 @@ prediction_layout = html.Div(children=[dbc.Row([
                                                                         )
                                                                 ]
                                                         ),
-                                                dbc.Col(children=[output_card(id="prediction_output",
-                                                                                card_label="Prediction",
-                                                                                card_size=2,
-                                                                                icon = 'fa-solid fa-check'
-                                                                            )
-                                                                ]
-                                                        ),
+                                                # dbc.Col(children=[output_card(id="prediction_output",
+                                                #                                 card_label="Prediction",
+                                                #                                 card_size=2,
+                                                #                                 icon = 'fa-solid fa-check'
+                                                #                             )
+                                                #                 ]
+                                                #         ),
                                                 ]
                                             ),
                                         
                                         dbc.Row(
-                                            dbc.Col(lg=4,
-                                                    children=[
-                                                        #html.Br(),
-                                                        dbc.Label(''),
-                                                        dbc.Button(id='submit_parameters',
-                                                                    children='Predict Assignment status',
-                                                                    style=button_style
-                                                                )
-                                                    ]
-                                                    )
+                                            children=[dbc.Col(lg=4,
+                                                                children=[
+                                                                        dbc.Label(''),
+                                                                        dbc.Button(id='submit_parameters',
+                                                                                children='Predict Assignment status',
+                                                                                style=button_style
+                                                                                )
+                                                                ]
+                                                        ),
+                                                      dbc.Col(children=[output_card(id="prediction_output",
+                                                                                card_label="Prediction",
+                                                                                card_size=4,
+                                                                                icon = 'fa-solid fa-check'
+                                                                            )
+                                                                ]
+                                                        )
+                                                ]
                                         )
                                     ]
                     )
