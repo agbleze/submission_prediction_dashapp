@@ -4,9 +4,7 @@ from dash import html, Input, Output, State, dcc, callback_context
 import dash_bootstrap_components as dbc
 import pandas as pd
 from dash.exceptions import PreventUpdate
-from helper_components import (
-                               make_boxplot, plot_barplot, get_path,
-                               CorrelationMatrix,
+from helper_components import (make_boxplot, plot_barplot, get_path,
                                )
 import dash
 import joblib
@@ -23,12 +21,6 @@ from layout.ui.crossval_ui import crossval_layout
 from layout.ui.roc_curve_ui import roc_curve_layout
 
 
-boxplot_features = ['extra_time_min', 'average_answer_time_in_min', 'progress_percent']
-
-barplot_features = ['state_category', 'work_rate', 'extra_time_min', 'average_answer_time_in_min', 'progress_percent'] 
-## add numeric features to it. When selected group by state category and find mean of numeric feature
-# then plot bar graph
-
 data_path = get_path(folder_name='data', file_name='selected_data_features.csv')
 
 model_path = get_path(folder_name='model_store', file_name='best_model.model')
@@ -36,7 +28,7 @@ data = pd.read_csv(data_path)
 
 best_model_loaded = joblib.load(model_path)
 
-#%%
+
 app = dash.Dash(__name__, external_stylesheets=[
                                                 dbc.themes.SOLAR,
                                                 dbc.icons.BOOTSTRAP,
@@ -113,7 +105,7 @@ def make_prediction(button_click, progress_percent, work_rate, extratime):
             message = ('All parameters must be provided. Either some values have not \
                         been provided or invalid values were provided. Please select the \
                        right values for all parameters from the dropdown. \
-                        Then, click on predict submission status button for \
+                        Then, click on predict Assignment status button for \
                         prediction'
                        )
             return True, message, dash.no_update
@@ -146,7 +138,6 @@ def render_boxplot_graph(boxplot_variable_selected):
     return make_boxplot(data=data, variable_name=boxplot_variable_selected)
 
 
-## show dropdown ofvarious model metrics when model eval is clicked
 @app.callback(Output(component_id='id_collapse_model_eval', component_property='is_open'),
               Input(component_id='id_model_eval', component_property='n_clicks'),
               State(component_id='id_collapse_model_eval', component_property='is_open')
@@ -156,11 +147,7 @@ def toggle_sidebar_buttons(input_value, state_value):
         state_value = not state_value
         return state_value
     state_value = state_value
-    return state_value
-
-
- 
-    
+    return state_value    
 
 if __name__=='__main__':
     app.run_server(port=8040, debug=True, use_reloader=True)
