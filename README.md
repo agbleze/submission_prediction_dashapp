@@ -1,4 +1,4 @@
-# Dash app package for powered by machine learning
+# Dash app package powered by machine learning as POC for an online education provider
 
 # Project description
 
