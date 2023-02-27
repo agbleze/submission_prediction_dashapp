@@ -4,6 +4,7 @@ from style import cardbody_style, card_icon, cardimg_style, card_style
 import plotly.express as px
 import pandas as pd
 from typing import List, Optional, Dict
+import os
 
 
 
@@ -215,18 +216,18 @@ def create_dropdown(dropdown_values: List = model_eval_dropdown_values, dropdown
                 )
         
 
-def create_img_container(img_src: str, label: str, img_style: dict):
-    return dbc.Col(children=[
-                                dbc.Label(label), html.Br(),
-                                dbc.Card(
-                                            [
-                                            dbc.CardImg(
-                                                        src=img_src,
-                                                        top=True,
-                                                        style=img_style,
-                                                    ),
-                                            ],
-                                        )
+def create_img_container(img_src: str, label: str, image_style: dict = None, column_width=4):
+    return dbc.Col(lg=column_width,
+                   children=[dbc.Label(label), html.Br(),
+                            dbc.Card(
+                                        [
+                                        dbc.CardImg(
+                                                    src=img_src,
+                                                    top=True,
+                                                    style=image_style,
+                                                ),
+                                        ],
+                                    )
                             ]
                     )
 
@@ -235,7 +236,7 @@ def create_img_container(img_src: str, label: str, img_style: dict):
 
 def create_dropdown_with_graph_figure(label: str, dropdown_id: str, dropdown_values: List,
                                       graph_id: str, loading_type: str = 'circle',
-                                      label_style: Dict = None, 
+                                      label_style: Dict = None, column_width=6,
                                       **kwargs
                                       ):
         """Returns a column with a label, dropdown and graph with loading status
@@ -250,7 +251,7 @@ def create_dropdown_with_graph_figure(label: str, dropdown_id: str, dropdown_val
         Returns:
             _type_: a column with label, dropdown and graph for plotting
         """
-        return dbc.Col(id="",
+        return dbc.Col(id="", lg=column_width,
                         children=[dbc.Row(dbc.Label(label, style=label_style)),
                                 dbc.Row(create_dropdown(dropdown_id = dropdown_id, dropdown_values = dropdown_values)
                                         ),
@@ -265,6 +266,16 @@ def create_dropdown_with_graph_figure(label: str, dropdown_id: str, dropdown_val
                 )
         
         
-        
+
+# function to get the full pathname for the data file
+
+def get_path(folder_name: str, file_name: str):
+    cwd = os.getcwd()
+    return f"{cwd}/{folder_name}/{file_name}"
+ 
+ 
+ 
+ 
+ 
         
         
