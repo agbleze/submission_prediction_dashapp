@@ -204,13 +204,16 @@ class CorrelationMatrix:
         
         
 model_eval_dropdown_values = ['Cross Validation', 'Classification report', 'ROC Curve']        
-def create_dropdown(dropdown_values: List = model_eval_dropdown_values, dropdown_id = 'model_eval_variable_select'):
+def create_dropdown(dropdown_values: List = model_eval_dropdown_values, 
+                    dropdown_id = 'model_eval_variable_select', 
+                    default_value = None):
     return dbc.Col(#lg=3,
                     children=[
                         dcc.Dropdown(id=dropdown_id,
                                 options=[{'label': var, 'value': var}
                                         for var in dropdown_values
-                                        ]
+                                        ],
+                                value=default_value
                                 )
                             ]
                 )
@@ -236,7 +239,7 @@ def create_img_container(img_src: str, label: str, image_style: dict = None, col
 
 def create_dropdown_with_graph_figure(label: str, dropdown_id: str, dropdown_values: List,
                                       graph_id: str, loading_type: str = 'circle',
-                                      label_style: Dict = None, column_width=6,
+                                      label_style: Dict = None, column_width=6, default_value = None,
                                       **kwargs
                                       ):
         """Returns a column with a label, dropdown and graph with loading status
@@ -253,7 +256,9 @@ def create_dropdown_with_graph_figure(label: str, dropdown_id: str, dropdown_val
         """
         return dbc.Col(id="", lg=column_width,
                         children=[dbc.Row(dbc.Label(label, style=label_style)),
-                                dbc.Row(create_dropdown(dropdown_id = dropdown_id, dropdown_values = dropdown_values)
+                                dbc.Row(create_dropdown(dropdown_id = dropdown_id, dropdown_values = dropdown_values,
+                                                        default_value=default_value
+                                                        )
                                         ),
                                 dbc.Row(dcc.Loading(type=loading_type,
                                                     children=[dbc.Col(#lg=9,
