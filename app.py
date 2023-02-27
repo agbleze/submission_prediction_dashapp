@@ -4,31 +4,17 @@ from dash import html, Input, Output, State, dcc, callback_context
 import dash_bootstrap_components as dbc
 import pandas as pd
 from dash.exceptions import PreventUpdate
-from helper_components import ( 
-                               plot_histogram, 
-                               plot_scatterplot, 
-                               make_boxplot, plot_barplot,
-                               CorrelationMatrix, plot_histogram, 
-                               plot_scatterplot, make_boxplot
+from helper_components import (
+                               make_boxplot, plot_barplot, get_path,
+                               CorrelationMatrix,
                                )
 import dash
-from style import homepage_icon_style
-from builders import (main_layout, app_description, explore_layout, 
-                      histogram_layout, boxplot_layout, histogram_layout, 
-                      scatter_layout, prediction_layout, 
-                      multicoll_layout, intro_layout                      
-                      )
-import builders
-import logging
-from urllib.parse import unquote
 import joblib
 import functools
 import plotly.express as px
 
 
-
 from layout.sidebar_layout import appside_layout
-#from layout.ui.project_description_ui import create_offcanvans
 from layout.ui.data_viz_ui import data_viz_layout
 from layout.ui.project_description_ui import project_descrip_layout
 from layout.ui.prediction_ui import prediction_layout
@@ -37,21 +23,18 @@ from layout.ui.crossval_ui import crossval_layout
 from layout.ui.roc_curve_ui import roc_curve_layout
 
 
-#loaded_model = joblib.load(filename='bagging.model')
-#data = pd.read_csv(r"Data/train_set.csv")
-
-
-
 boxplot_features = ['extra_time_min', 'average_answer_time_in_min', 'progress_percent']
 
 barplot_features = ['state_category', 'work_rate', 'extra_time_min', 'average_answer_time_in_min', 'progress_percent'] 
 ## add numeric features to it. When selected group by state category and find mean of numeric feature
 # then plot bar graph
 
+data_path = get_path(folder_name='data', file_name='selected_data_features.csv')
 
-data = pd.read_csv(r'data/selected_data_features.csv')
+model_path = get_path(folder_name='model_store', file_name='best_model.model')
+data = pd.read_csv(data_path)
 
-best_model_loaded = joblib.load('model_store/best_model.model')
+best_model_loaded = joblib.load(model_path)
 
 #%%
 app = dash.Dash(__name__, external_stylesheets=[
@@ -65,59 +48,47 @@ app = dash.Dash(__name__, external_stylesheets=[
 app.layout = appside_layout
 
 app.validation_layout = html.Div(
-                                [#main_layout,
+                                [
                                 appside_layout, 
                                 project_descrip_layout, 
                                 data_viz_layout,
-                                prediction_layout #, 
-                                # histogram_layout,
-                                #scatter_layout, boxplot_layout, 
-                                # multicoll_layout, intro_layout
+                                prediction_layout, 
+                                classification_report_layout, 
+                                crossval_layout, roc_curve_layout
                                 ]
                             )
 
 
-# %%
-# @app.callback(
-#     Output(component_id="main_content", component_property="children"),
-#     Input(component_id="location", component_property="href"),
-# )
-# def show_page_display(href):
-#     site_page = href
-#     site_to_view = site_page.split("/")[-1]
-#     if site_to_view == "explore":
-#         return explore_layout 
-#     elif site_to_view == 'predict':
-#         return prediction_layout
-#     else:
-#         return app_description
 
-
-@app.callback(
-                Output("page_content", "children"),
-                [
-                    Input("id_proj_desc", "n_clicks_timestamp"),
-                    #Input("id_model_eval", "n_clicks_timestamp"),
-                    Input("id_data_viz", "n_clicks_timestamp"),
-                    Input("id_prediction", "n_clicks_timestamp"),
-                ],
+@app.callback(Output(component_id="page_content", component_property="children"),
+              Input(component_id="id_proj_desc", component_property="n_clicks_timestamp"),
+              Input(component_id="id_data_viz", component_property="n_clicks_timestamp"),
+              Input(component_id="id_prediction", component_property="n_clicks_timestamp"),
+              Input(component_id='id_crossval_btn', component_property='n_clicks_timestamp'),
+              Input(component_id='id_classification_btn', component_property='n_clicks_timestamp'),
+              Input(component_id='id_roc_btn', component_property='n_clicks_timestamp')
             )
-def sidebar_display(hist: str, boxplot: str, scatter: str, corr: str):
+def sidebar_display(id_proj_desc: str, id_data_viz: str, id_pred: str, id_crossval: str, id_classification, id_roc):
     ctx = dash.callback_context
     button_id = ctx.triggered[0]["prop_id"].split(".")[0]
-
     if not ctx.triggered:
-        return project_descrip_layout #create_offcanvans()
+        return project_descrip_layout
     elif button_id == "id_proj_desc":
         return project_descrip_layout
-    # elif button_id == "id_model_eval":
-    #     return boxplot_layout
     elif button_id == "id_data_viz":
         return data_viz_layout
     elif button_id == "id_prediction":
         return prediction_layout
+    elif button_id == 'id_crossval_btn':
+        return crossval_layout
+    elif button_id == 'id_classification_btn':
+        return classification_report_layout
+    elif button_id == 'id_roc_btn':
+        return roc_curve_layout
     else:
-        return project_descrip_layout #intro_layout
+        return project_descrip_layout
+    
+        
 
 @functools.lru_cache(maxsize=None)    
 @app.callback(Output(component_id='missing_para_popup', component_property='is_open'),
@@ -188,64 +159,10 @@ def toggle_sidebar_buttons(input_value, state_value):
     return state_value
 
 
-# function to show evaluation page when an evaluation metric in collapse section is clicked
-@app.callback(Output(component_id='page_content', component_property='children'),
-              Input(component_id='id_crossval_btn', component_property='n_clicks_timestamp'),
-              Input(component_id='id_classification_btn', component_property='n_clicks_timestamp'),
-              Input(component_id='id_roc_btn', component_property='n_clicks_timestamp')
-              )
-def show_model_evaluation_page(id_crossval, id_classification, id_roc):
-    button_id = callback_context.triggered[0]["prop_id"].split(".")[0]
-    if not callback_context.triggered:
-        button_id = 'No clicks yet'
-    elif button_id == 'id_crossval_btn':
-        return crossval_layout
-    elif button_id == 'id_classification_btn':
-        return classification_report_layout
-    elif button_id == 'id_roc_btn':
-        return roc_curve_layout
-    else:
-        return project_descrip_layout
-
-
-    
-
-
-
-
-
-
-
-# @app.callback(Output(component_id='project_canvans', component_property='is_open'),
-#               Input(component_id='proj_desc', component_property='n_clicks'),
-#               State(component_id='project_canvans', component_property='is_open')
-#               )
-# def toggle_project_description(proj_desc_button_clicked: str, is_open: bool) -> bool:
-#     """
-#     This function accepts click event input and the state of canvas component,
-#     and change the state of the canvans component when a click occurs
-
-#     Parameters
-#     ----------
-#     proj_desc_button_clicked : str
-#         This parameter is a count of each click made on a button.
-#     is_open : bool
-#         Has the values True or False that specifies whether the canvas component is opened or not.
-
-#     Returns
-#     -------
-#     bool
-#         Has values True or False that determines whether the canvans component should be open.
-
-#     """
-#     if proj_desc_button_clicked:
-#         return not is_open
-#     else:
-#         return is_open
-    
+ 
     
 
 if __name__=='__main__':
-    app.run_server(port=8040, debug=False, use_reloader=False)
+    app.run_server(port=8040, debug=True, use_reloader=True)
 
 
