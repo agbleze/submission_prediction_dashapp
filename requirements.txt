@@ -6,3 +6,4 @@ pandas==1.4.2
 Pillow==9.4.0
 plotly==4.14.3
 setuptools==62.1.0
+scikit-learn==1.0.2
